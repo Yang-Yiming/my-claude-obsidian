@@ -26,8 +26,8 @@ Three layers:
 
 ```
 vault/
-├── .raw/       # Layer 1: immutable source documents
 ├── wiki/       # Layer 2: LLM-generated knowledge base
+├── anything outside wiki/       # Layer 1: immutable source documents
 └── CLAUDE.md   # Layer 3: schema and instructions (this plugin)
 ```
 
@@ -148,17 +148,18 @@ Created: YYYY-MM-DD
 
 - All notes use YAML frontmatter: type, status, created, updated, tags (minimum)
 - Wikilinks use [[Note Name]] format: filenames are unique, no paths needed
-- .raw/ contains source documents: never modify them
+- wiki/ is the only writable zone: create and update pages here
+- Everything outside wiki/ is read-only source material, never modify them.
 - wiki/index.md is the master catalog: update on every ingest
 - wiki/log.md is append-only: never edit past entries
 - New log entries go at the TOP of the file
 
 ## Operations
 
-- Ingest: drop source in .raw/, say "ingest [filename]"
+- Ingest: drop source file path, say "ingest [filename]"
 - Query: ask any question: Claude reads index first, then drills in
 - Lint: say "lint the wiki" to run a health check
-- Archive: move cold sources to .archive/ to keep .raw/ clean
+- Archive: move cold sources to archive/ to keep vault clean
 ```
 
 ---
@@ -198,7 +199,7 @@ Your job as the LLM:
 4. Maintain hot cache after every operation
 5. Always update index, sub-indexes, log, and hot cache on changes
 6. Always use frontmatter and wikilinks
-7. Never modify .raw/ sources
+7. Only write files inside `wiki/`
 
 The human's job: curate sources, ask good questions, think about what it means. Everything else is on you.
 
