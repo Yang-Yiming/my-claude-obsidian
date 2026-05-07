@@ -46,7 +46,7 @@ When you need context not already in this project:
 Do NOT read the wiki for general coding questions or things already in this project.
 ```
 
-## Plugin Skills
+## Skills
 
 | Skill | Trigger |
 |-------|---------|
@@ -57,8 +57,3 @@ Do NOT read the wiki for general coding questions or things already in this proj
 | `/save` | File the current conversation as a structured wiki note |
 | `/autoresearch [topic]` | Autonomous research loop: search, fetch, synthesize, file |
 | `/canvas` | Visual layer: add images, PDFs, notes to Obsidian canvas |
-
-## MCP (Optional)
-
-If you configured the MCP server, Claude can read and write vault notes directly.
-See `skills/wiki/references/mcp-setup.md` for setup instructions.
