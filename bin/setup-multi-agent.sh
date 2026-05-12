@@ -4,16 +4,11 @@
 # Idempotent: safe to run multiple times.
 #
 # Supported agents:
-#   - Claude Code    : auto-discovered via .claude-plugin/ (no symlink needed)
 #   - Codex CLI      : symlink to ~/.codex/skills/claude-obsidian
 #   - OpenCode       : symlink to ~/.opencode/skills/claude-obsidian
 #   - Gemini CLI     : symlink to ~/.gemini/skills/claude-obsidian
-#   - Cursor         : symlink to .cursor/skills (in repo)
-#   - Windsurf       : symlink to .windsurf/skills (in repo)
 #
-# Bootstrap files (AGENTS.md, GEMINI.md, .cursor/rules/, .windsurf/rules/,
-# .github/copilot-instructions.md) are already committed in the repo.
-# This script just wires up the skills directory.
+# This script wires the skills directory into agent-specific skill search paths.
 
 set -euo pipefail
 
@@ -70,18 +65,9 @@ link_if_missing "$SKILLS_DIR" "$HOME/.opencode/skills/claude-obsidian" "OpenCode
 # Gemini CLI
 link_if_missing "$SKILLS_DIR" "$HOME/.gemini/skills/claude-obsidian" "Gemini CLI"
 
-# Cursor (workspace-local)
-link_if_missing "$SKILLS_DIR" "$REPO_ROOT/.cursor/skills" "Cursor"
-
-# Windsurf (workspace-local)
-link_if_missing "$SKILLS_DIR" "$REPO_ROOT/.windsurf/skills" "Windsurf"
-
 echo
-echo -e "${GREEN}Done.${NC} Bootstrap files (AGENTS.md, GEMINI.md, .cursor/rules/, .windsurf/rules/, .github/copilot-instructions.md) are already in this repo."
+echo -e "${GREEN}Done.${NC}"
 echo
 echo "To verify each agent picks up the skills:"
-echo "  - Claude Code: open the project, type /wiki"
 echo "  - Codex CLI:   codex --list-skills | grep claude-obsidian"
-echo "  - Cursor:      open the project, ask 'what skills do you have?'"
-echo "  - Windsurf:    open in Cascade, ask the same"
 echo "  - Gemini CLI:  gemini --list-skills (if supported)"

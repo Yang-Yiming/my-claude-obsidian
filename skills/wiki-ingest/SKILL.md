@@ -57,14 +57,8 @@ Steps:
 1. **Fetch** the page using WebFetch.
 2. **Clean** (optional): if `defuddle` is available (`which defuddle 2>/dev/null`), run `defuddle [url]` to strip ads, nav, and clutter. Typically saves 40-60% tokens. Fall back to raw WebFetch output if not installed.
 3. **Derive slug** from the URL path (last segment, lowercased, spaces→hyphens, strip query strings).
-4. **Save** to `wiki/raw/[slug]-[YYYY-MM-DD].md` with a frontmatter header:
-   ```markdown
-   ---
-   source_url: [url]
-   fetched: [YYYY-MM-DD]
-   ---
-   ```
-5. Proceed with **Single Source Ingest** starting at step 2
+4. Treat the fetched markdown as the source content for this ingest. Do not create `wiki/raw/` or copy URL content into a raw folder by default.
+5. Proceed with **Single Source Ingest** starting at step 2. Record the URL in the source summary frontmatter.
 
 ---
 
@@ -76,7 +70,7 @@ Steps:
 
 1. **Read** the image file using the Read tool. Claude can process images natively.
 2. **Describe** the image contents: extract all text (OCR), identify key concepts, entities, diagrams, and data visible in the image.
-3. **Save** the description to `wiki/raw/images/[slug]-[YYYY-MM-DD].md`:
+3. Use the image description as the source content for this ingest:
    ```markdown
    ---
    source_type: image
@@ -87,8 +81,8 @@ Steps:
 
    [Full description of image contents, transcribed text, entities visible, etc.]
    ```
-4. Copy the image to `wiki/attachments/[slug].[ext]` if it's not already in the vault.
-5. Proceed with **Single Source Ingest** on the saved description file.
+4. Do not copy the original image unless the user explicitly asks. Link back to the original path in the source summary.
+5. Proceed with **Single Source Ingest** on the description.
 
 Use cases: whiteboard photos, screenshots, diagrams, infographics, document scans.
 
@@ -154,7 +148,7 @@ Token budget matters. Follow these rules during ingest:
 ## Contradictions
 
 > [!note] Custom callout dependency
-> The `[!contradiction]` callout type used below is a **custom callout** defined in `.obsidian/snippets/vault-colors.css` (auto-installed by `/wiki` scaffold). It renders with reddish-brown styling and an alert-triangle icon when the snippet is enabled. If the snippet is missing, Obsidian falls back to default callout styling, so the page still works without the visual flourish. See [[skills/wiki/references/css-snippets.md]] for the four custom callouts (`contradiction`, `gap`, `key-insight`, `stale`).
+> The `[!contradiction]` callout type used below is readable in plain Obsidian even without custom CSS. If a vault has custom snippets, it may render with special styling.
 
 When new info contradicts an existing wiki page:
 

@@ -30,16 +30,18 @@ defuddle https://example.com/article
 ```
 Outputs clean markdown to stdout.
 
-### Save to wiki/raw/
+### Clean and pass to ingest
 ```bash
-defuddle https://example.com/article > wiki/raw/articles/article-slug-$(date +%Y-%m-%d).md
+defuddle https://example.com/article
 ```
+Use the cleaned markdown as source content for `wiki-ingest`. Do not save it under `wiki/raw/`.
 
-### Add frontmatter header after saving
-After running defuddle, prepend the source URL and fetch date:
+### Save outside wiki only when the user asks
+If the user explicitly wants a cleaned source file, save it outside `wiki/` and then ingest that path:
 ```bash
 SLUG="article-slug-$(date +%Y-%m-%d)"
-{ echo "---"; echo "source_url: https://example.com/article"; echo "fetched: $(date +%Y-%m-%d)"; echo "---"; echo ""; defuddle https://example.com/article; } > wiki/raw/articles/$SLUG.md
+mkdir -p cleaned-sources/articles
+{ echo "---"; echo "source_url: https://example.com/article"; echo "fetched: $(date +%Y-%m-%d)"; echo "---"; echo ""; defuddle https://example.com/article; } > cleaned-sources/articles/$SLUG.md
 ```
 
 ### Clean a local HTML file
@@ -80,5 +82,5 @@ If not installed: use WebFetch directly. The content will be less clean but stil
 The `/wiki-ingest` skill checks for defuddle automatically when a URL is passed. You do not need to run defuddle manually before ingesting a URL. The ingest skill will call it if available.
 
 To manually clean a page and save before ingesting:
-1. Run the save command above
-2. Then: `ingest wiki/raw/articles/[slug].md`
+1. Save it outside `wiki/` using a user-approved source folder.
+2. Then ingest that saved file path.

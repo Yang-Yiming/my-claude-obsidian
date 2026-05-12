@@ -60,15 +60,11 @@ Install via Settings > Community Plugins > Turn off Restricted Mode > Browse.
 |--------|---------|
 | **Templater** | Auto-populate frontmatter on note creation from `_templates/`. |
 | **Obsidian Git** | Auto-commit every 15 minutes. Protects against bad writes. |
-| **Calendar** | Right-sidebar calendar with word count, task, and link indicators. Pre-installed in this vault via `.obsidian/plugins/calendar/`. |
-| **Thino** | Quick memo capture panel in right sidebar. Pre-installed via `.obsidian/plugins/thino/`. |
+| **Calendar** | Right-sidebar calendar with word count, task, and link indicators. |
+| **Thino** | Quick memo capture panel in right sidebar. |
 | **Iconize** | Visual folder icons for navigation. |
 | **Minimal Theme** | Best dark theme for dense information display. |
 | **Dataview** *(optional/legacy)* | Only needed if you're on Obsidian < 1.9.10 or want to use the legacy `dashboard.md` queries. The primary dashboard now uses Bases. |
-
-**Calendar and Thino are pre-installed**. They ship with this vault. Enable them in Settings → Community Plugins → toggle on. No download needed.
-
-If installing in a different vault: download `main.js` + `manifest.json` from their GitHub releases into `.obsidian/plugins/calendar/` and `.obsidian/plugins/thino/` respectively.
 
 Optional additions:
 - **Smart Connections**: semantic search across all notes
@@ -79,11 +75,11 @@ Optional additions:
 
 ## Web Clipper
 
-The Obsidian Web Clipper browser extension converts web articles to markdown and sends them to `.raw/` in one click.
+The Obsidian Web Clipper browser extension converts web articles to markdown. Save clipped content outside `wiki/` so it remains source material.
 
 Install for Chrome, Firefox, or Safari from the Obsidian website.
 
-Set the default folder to `.raw/` in the extension settings.
+Set the default folder to any source folder outside `wiki/`.
 
 ---
 
@@ -92,5 +88,4 @@ Set the default folder to `.raw/` in the extension settings.
 1. Enable Bases: Settings > Core Plugins > toggle on (already on by default in Obsidian v1.9.10+)
 2. Enable Templater: Settings > Templater > set template folder to `_templates`
 3. Enable Obsidian Git: Settings > Obsidian Git > Auto backup interval: 15 minutes
-4. Enable the CSS snippet: Settings > Appearance > CSS Snippets > toggle on `vault-colors`
-5. *(Optional)* Enable Dataview only if you want the legacy `wiki/meta/dashboard.md` queries to work alongside the primary `dashboard.base`
+4. *(Optional)* Enable Dataview only if you want the legacy `wiki/meta/dashboard.md` queries to work alongside the primary `dashboard.base`

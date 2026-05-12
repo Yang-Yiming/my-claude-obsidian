@@ -33,9 +33,9 @@ The [[LLM Wiki Pattern]] turns an LLM into a knowledge architect rather than a s
 
 ### The three layers
 
-1. **`.raw/`** — your source documents. Immutable. Claude reads, never modifies.
+1. **Everything outside `wiki/`** — source documents. Immutable by default. Agents read them, but do not modify them.
 2. **`wiki/`** — Claude-generated knowledge. Summaries, entities, concepts, synthesis.
-3. **`CLAUDE.md`** — the schema. Tells Claude how the wiki is structured and what to do.
+3. **`skills/`** — operating instructions that tell agents how to maintain the wiki.
 
 ### Why it compounds
 
