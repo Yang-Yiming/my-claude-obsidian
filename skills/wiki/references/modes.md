@@ -10,7 +10,6 @@ Use when: "build a sitemap wiki for my website", "map content gaps", "SEO audit 
 
 ```
 vault/
-├── .raw/              # crawl exports, analytics, scraped pages, GSC data
 ├── wiki/
 │   ├── index.md
 │   ├── log.md
@@ -20,7 +19,7 @@ vault/
 │   ├── keywords/      # keyword clusters, target page assignments
 │   ├── entities/      # brand, authors, topic hubs
 │   └── meta/
-└── _templates/
+└── wiki/templates/
 ```
 
 Frontmatter for `wiki/pages/` notes:
@@ -55,7 +54,6 @@ Use when: "map my codebase", "architecture wiki for my repo", "understand this p
 
 ```
 vault/
-├── .raw/              # README, git log exports, code dumps, issue exports
 ├── wiki/
 │   ├── index.md
 │   ├── log.md
@@ -65,7 +63,7 @@ vault/
 │   ├── dependencies/  # external deps, versions, risk assessment
 │   ├── flows/         # data flows, request paths, auth flows
 │   └── meta/
-└── _templates/
+└── wiki/templates/
 ```
 
 Frontmatter for `wiki/modules/` notes:
@@ -97,7 +95,6 @@ Use when: "project wiki", "competitive intelligence", "team knowledge base", "me
 
 ```
 vault/
-├── .raw/              # meeting transcripts, Slack exports, docs, emails
 ├── wiki/
 │   ├── index.md
 │   ├── log.md
@@ -107,7 +104,7 @@ vault/
 │   ├── intel/         # competitor analysis, market research
 │   ├── comms/         # synthesized meeting notes, key threads
 │   └── meta/
-└── _templates/
+└── wiki/templates/
 ```
 
 Frontmatter for `wiki/decisions/` notes:
@@ -136,7 +133,6 @@ Use when: "personal second brain", "track my goals", "journal synthesis", "life 
 
 ```
 vault/
-├── .raw/              # journal entries, articles, podcast notes, voice transcripts
 ├── wiki/
 │   ├── index.md
 │   ├── log.md
@@ -147,7 +143,7 @@ vault/
 │   ├── areas/         # life areas: health, finances, career, creative
 │   ├── resources/     # books, courses, tools worth referencing
 │   └── meta/
-└── _templates/
+└── wiki/templates/
 ```
 
 Frontmatter for `wiki/goals/` notes:
@@ -177,7 +173,6 @@ Use when: "research wiki on [topic]", "track papers I'm reading", "build a thesi
 
 ```
 vault/
-├── .raw/              # PDFs, web clips, data files, raw notes
 ├── wiki/
 │   ├── index.md
 │   ├── log.md
@@ -187,7 +182,7 @@ vault/
 │   ├── thesis/        # evolving synthesis: the "state of the field" pages
 │   ├── gaps/          # open questions, contradictions, research needed
 │   └── meta/
-└── _templates/
+└── wiki/templates/
 ```
 
 Frontmatter for `wiki/papers/` notes:
@@ -218,7 +213,6 @@ Use when: "companion wiki for a book", "course notes wiki", "as I read [title]"
 
 ```
 vault/
-├── .raw/              # chapter notes, highlights, exercises
 ├── wiki/
 │   ├── index.md
 │   ├── log.md
@@ -228,7 +222,7 @@ vault/
 │   ├── timeline/      # plot structure, curriculum sequence, chapter map
 │   ├── synthesis/     # your own takeaways, questions, applications
 │   └── meta/
-└── _templates/
+└── wiki/templates/
 ```
 
 Frontmatter for `wiki/concepts/` notes:

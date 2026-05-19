@@ -9,9 +9,8 @@
 # Excalidraw main.js is 8MB — downloaded by setup-vault.sh, not tracked in git
 .obsidian/plugins/obsidian-excalidraw-plugin/main.js
 
-# Large binary assets — add your own images to _attachments/images/
-# Uncomment the line below to exclude images from git (recommended for large vaults)
-# _attachments/images/
+# Legacy root attachments are treated as source material outside wiki/.
+# Wiki-managed assets should live under wiki/assets/.
 .smart-connections/
 .obsidian-git-data
 .trash/
@@ -89,7 +88,7 @@ _attachments/the-frontier.png
 # Excalidraw drawings (personal, user-specific)
 Excalidraw/
 
-# Loose brand/personal GIFs and images in vault root (not _attachments/)
+# Loose brand/personal GIFs and images in vault root
 Claude SEO*.gif
 Claude SEO*.png
 

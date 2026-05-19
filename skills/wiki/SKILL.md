@@ -1,7 +1,7 @@
 ---
 name: wiki
 description: >
-  Local .raw/ + wiki/ knowledge companion. Sets up a minimal wiki structure,
+  Obsidian-compatible wiki knowledge companion. Sets up a minimal wiki structure,
   scaffolds it from a one-sentence description, and routes to specialized sub-skills.
   Use for setup, scaffolding, querying, ingest, linting, and hot cache management.
   Triggers on: "set up wiki", "scaffold vault", "create knowledge base", "/wiki",
@@ -21,12 +21,12 @@ The key difference from RAG: the wiki is a persistent artifact. Cross-references
 
 ## Architecture
 
-Two working areas:
+Repository model:
 
 ```
 vault/
-├── .raw/       # Layer 1: immutable source documents
-└── wiki/       # Layer 2: LLM-generated knowledge base
+├── wiki/       # writable wiki pages, templates, dashboards, and metadata
+└── everything outside wiki/       # read-only source material and tool/config files
 ```
 
 Standard wiki structure:
@@ -46,10 +46,11 @@ wiki/
 │   └── _index.md
 ├── comparisons/        # side-by-side analyses
 ├── questions/          # filed answers to user queries
+├── templates/          # note templates used when creating wiki pages
 └── meta/               # dashboards, lint reports, conventions
 ```
 
-Use `.raw/` for user-provided source material. Agents may create helper files under `.raw/` for fetched URLs or image descriptions, but should not rewrite user-provided sources.
+There is no managed `.raw/` folder in this fork. Treat any user-provided file outside `wiki/` as source material when the user asks to ingest it. Do not write helper files outside `wiki/`; summaries, manifests, templates, and dashboards belong under `wiki/`.
 
 ---
 
@@ -117,10 +118,10 @@ Steps:
 
 1. Determine the wiki mode. Read `references/modes.md` and pick the best fit.
 2. Ask: "What is this vault for?" (one question, then proceed).
-3. Create `.raw/articles/`, `.raw/images/`, and `.raw/files/` if missing.
-4. Create the standard `wiki/` folder structure.
-5. Create `wiki/index.md`, `wiki/log.md`, `wiki/hot.md`, `wiki/overview.md`, and relevant `_index.md` files.
-6. Create `_templates/` files if they do not already exist.
+3. Create the standard `wiki/` folder structure.
+4. Create `wiki/index.md`, `wiki/log.md`, `wiki/hot.md`, `wiki/overview.md`, and relevant `_index.md` files.
+5. Create `wiki/templates/` files if they do not already exist.
+6. Create `wiki/meta/manifest.json` if metadata tracking is needed.
 7. Present the created structure and ask: "Want to adjust anything before we start?"
 
 ---
@@ -160,6 +161,6 @@ Your job as the LLM:
 4. Maintain hot cache after every operation
 5. Always update index, sub-indexes, log, and hot cache on changes
 6. Always use frontmatter and wikilinks
-7. Never modify user-provided source files under `.raw/`
+7. Only write files inside `wiki/`
 
 The human's job: curate sources, ask good questions, think about what it means. Everything else is on you.

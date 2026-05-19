@@ -13,18 +13,18 @@ Read the source. Write the wiki. Cross-reference everything. A single source typ
 
 ## Delta Tracking
 
-Before ingesting any file, check `.raw/.manifest.json` to avoid re-processing unchanged sources.
+Before ingesting any file, check `wiki/meta/manifest.json` to avoid re-processing unchanged sources.
 
 ```bash
 # Check if manifest exists
-[ -f .raw/.manifest.json ] && echo "exists" || echo "no manifest yet"
+[ -f wiki/meta/manifest.json ] && echo "exists" || echo "no manifest yet"
 ```
 
 **Manifest format** (create if missing):
 ```json
 {
   "sources": {
-    ".raw/articles/article-slug-2026-04-08.md": {
+    "path/to/source-file.md": {
       "hash": "abc123",
       "ingested_at": "2026-04-08",
       "pages_created": ["wiki/sources/article-slug.md", "wiki/entities/Person.md"],
@@ -36,12 +36,12 @@ Before ingesting any file, check `.raw/.manifest.json` to avoid re-processing un
 
 **Before ingesting a file:**
 1. Compute a hash: `md5sum [file] | cut -d' ' -f1` (or `sha256sum` on Linux).
-2. Check if the path exists in `.raw/.manifest.json` with the same hash.
+2. Check if the path exists in `wiki/meta/manifest.json` with the same hash.
 3. If hash matches, skip. Report: "Already ingested (unchanged). Use `force` to re-ingest."
 4. If missing or hash differs, proceed with ingest.
 
 **After ingesting a file:**
-1. Record `{hash, ingested_at, pages_created, pages_updated}` in `.raw/.manifest.json`.
+1. Record `{hash, ingested_at, pages_created, pages_updated}` in `wiki/meta/manifest.json`.
 2. Write the updated manifest back.
 
 Skip delta checking if the user says "force ingest" or "re-ingest".
@@ -57,14 +57,14 @@ Steps:
 1. **Fetch** the page using WebFetch.
 2. **Clean** (optional): if `defuddle` is available (`which defuddle 2>/dev/null`), run `defuddle [url]` to strip ads, nav, and clutter. Typically saves 40-60% tokens. Fall back to raw WebFetch output if not installed.
 3. **Derive slug** from the URL path (last segment, lowercased, spaces→hyphens, strip query strings).
-4. **Save** to `.raw/articles/[slug]-[YYYY-MM-DD].md` with a frontmatter header:
+4. Treat the fetched markdown as the source content for this ingest. Do not create a raw folder or copy URL content outside `wiki/` by default.
    ```markdown
    ---
    source_url: [url]
    fetched: [YYYY-MM-DD]
    ---
    ```
-5. Proceed with **Single Source Ingest** starting at step 2 (file is now in `.raw/`).
+5. Proceed with **Single Source Ingest** starting at step 2. Record the URL in the source summary frontmatter.
 
 ---
 
@@ -76,7 +76,7 @@ Steps:
 
 1. **Read** the image file using the Read tool. Claude can process images natively.
 2. **Describe** the image contents: extract all text (OCR), identify key concepts, entities, diagrams, and data visible in the image.
-3. **Save** the description to `.raw/images/[slug]-[YYYY-MM-DD].md`:
+3. Use the image description as the source content for this ingest:
    ```markdown
    ---
    source_type: image
@@ -87,8 +87,8 @@ Steps:
 
    [Full description of image contents, transcribed text, entities visible, etc.]
    ```
-4. Copy the image to `_attachments/images/[slug].[ext]` if it's not already in the vault.
-5. Proceed with **Single Source Ingest** on the saved description file.
+4. Do not copy the original image unless the user explicitly asks. Link back to the original path in the source summary.
+5. Proceed with **Single Source Ingest** on the description.
 
 Use cases: whiteboard photos, screenshots, diagrams, infographics, document scans.
 
@@ -96,7 +96,7 @@ Use cases: whiteboard photos, screenshots, diagrams, infographics, document scan
 
 ## Single Source Ingest
 
-Trigger: user drops a file into `.raw/` or pastes content.
+Trigger: user provides a file path, URL, image, or pasted content.
 
 Steps:
 
@@ -112,7 +112,7 @@ Steps:
 10. **Append** to `wiki/log.md` (new entries at the TOP):
     ```markdown
     ## [YYYY-MM-DD] ingest | Source Title
-    - Source: `.raw/articles/filename.md`
+    - Source: `path/to/source-file`
     - Summary: [[Source Title]]
     - Pages created: [[Page 1]], [[Page 2]]
     - Pages updated: [[Page 3]], [[Page 4]]
@@ -177,7 +177,8 @@ Do not silently overwrite old claims. Flag and let the user decide.
 
 ## What Not to Do
 
-- **Source files under `.raw/` are immutable.** Do not modify the files that users drop there (articles, transcripts, images). The optional `.raw/.manifest.json` delta tracker is the only file under `.raw/` that `wiki-ingest` itself maintains. Treat every other file under `.raw/` as read-only source content.
+- **Do not write files outside `wiki/`.** All files outside `wiki/` are read-only source material unless the user explicitly asks to edit repo tooling.
+- **Manifest lives in `wiki/meta/`.** Keep delta tracking at `wiki/meta/manifest.json`.
 - Do not create duplicate pages. Always check the index and search before creating.
 - Do not skip the log entry. Every ingest must be recorded.
 - Do not skip the hot cache update. It is what keeps future sessions fast.

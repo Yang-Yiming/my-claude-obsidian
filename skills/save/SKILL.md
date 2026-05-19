@@ -68,7 +68,7 @@ status: developing
 related:
   - "[[Any Wiki Page Mentioned]]"
 sources:
-  - "[[.raw/source-if-applicable.md]]"
+  - "path-or-url-if-applicable"
 ---
 ```
 
@@ -93,7 +93,7 @@ status: active
 - Yes: "X works by doing Y. The key insight is Z."
 - Include all relevant context. Future sessions should be able to read this page cold.
 - Link every mentioned concept, entity, or wiki page with wikilinks.
-- Cite sources where applicable: `(Source: [[Page]])`.
+- Cite sources where applicable: `(Source: [[Page]])` or with a source path/URL when the original material lives outside `wiki/`.
 
 ---
 

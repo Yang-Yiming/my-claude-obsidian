@@ -67,12 +67,12 @@ If it does not exist, create it:
 ### add image (`/canvas add image [path or url]`)
 
 **Resolve the image:**
-- If URL (starts with `http`): download with `curl -sL [url] -o _attachments/images/canvas/[filename]`
+- If URL (starts with `http`): download with `curl -sL [url] -o wiki/assets/images/canvas/[filename]`
   Derive filename from URL path, or use `img-[timestamp].jpg` if unclear.
-- If local path outside vault: `cp [path] _attachments/images/canvas/`
+- If local path outside vault: `cp [path] wiki/assets/images/canvas/`
 - If already vault-relative: use as-is.
 
-Create `_attachments/images/canvas/` if it doesn't exist.
+Create `wiki/assets/images/canvas/` if it doesn't exist.
 
 **Detect aspect ratio:**
 Use `python3 -c "from PIL import Image; img=Image.open('[path]'); print(img.width, img.height)"` or `identify -format '%w %h' [path]`.
@@ -107,7 +107,7 @@ Position using auto-layout. Write and report.
 ### add pdf (`/canvas add pdf [path]`)
 
 Same as add image. Obsidian renders PDFs natively as file nodes.
-- Copy to `_attachments/pdfs/canvas/` if outside vault.
+- Copy to `wiki/assets/pdfs/canvas/` if outside vault.
 - Fixed size: width=400, height=520.
 - Report page count if you can determine it.
 
@@ -233,6 +233,6 @@ If a collision is detected (ID already exists in the canvas), append `-2`, `-3`,
 
 1. Read canvas-spec.md before editing any canvas JSON.
 2. Always read the canvas file before writing. Parse existing nodes to avoid ID collisions and calculate auto-positions.
-3. Create `_attachments/images/canvas/` for downloaded/copied images.
+3. Create `wiki/assets/images/canvas/` for downloaded/copied images.
 4. When creating a new canvas, update `wiki/overview.md`; do not add canvases to `wiki/index.md`.
 5. Report position and zone after every add operation.

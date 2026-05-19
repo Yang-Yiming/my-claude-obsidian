@@ -1,11 +1,11 @@
 ---
-description: Bootstrap or check the local .raw/ + wiki/ vault.
+description: Bootstrap or check the local wiki vault.
 ---
 
 Read the `wiki` skill. Then run the setup workflow:
 
 1. Check whether `wiki/` exists and contains `index.md`, `log.md`, `hot.md`, and `overview.md`.
-2. Check whether `.raw/` exists. If not, create `.raw/articles/`, `.raw/images/`, and `.raw/files/`.
+2. Check whether `wiki/templates/` exists for note templates and whether `wiki/meta/` exists for wiki metadata.
 3. If the wiki is missing or incomplete, ask ONE question: "What is this vault for?"
 4. Scaffold the minimal wiki structure from the answer.
 
@@ -20,4 +20,4 @@ Examples of what the user might say:
 - "Organize my YouTube channel — transcripts, topics, tools mentioned"
 - "Executive assistant brain — meetings, tasks, business context"
 
-If the vault is already set up, report current wiki state from `wiki/index.md`, `wiki/log.md`, and `.raw/.manifest.json` if it exists.
+If the vault is already set up, report current wiki state from `wiki/index.md`, `wiki/log.md`, and `wiki/meta/manifest.json` if it exists.

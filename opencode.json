@@ -12,8 +12,7 @@
     "external_directory": "ask",
     "edit": {
       "*": "ask",
-      "wiki/*": "allow",
-      ".raw/*": "deny"
+      "wiki/*": "allow"
     }
   }
 }

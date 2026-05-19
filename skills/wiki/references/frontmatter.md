@@ -21,7 +21,7 @@ status: <seed|developing|mature|evergreen>
 related:
   - "[[Other Page]]"
 sources:
-  - "[[.raw/articles/source-file.md]]"
+  - "path/to/source-file.md"
 ---
 ```
 
@@ -103,5 +103,5 @@ page_count: 0
 2. Dates as `YYYY-MM-DD` strings, not ISO datetime.
 3. Lists always use the `- item` format, not inline `[a, b, c]`.
 4. Wikilinks in YAML fields must be quoted: `"[[Page Name]]"`.
-5. Keep `related` and `sources` as wikilinks, not plain URLs.
+5. Keep `related` as wikilinks. `sources` may use wikilinks for wiki source summaries or plain paths/URLs for original source material outside `wiki/`.
 6. Update `updated` every time you edit the page content.

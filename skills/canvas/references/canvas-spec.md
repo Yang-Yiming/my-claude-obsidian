@@ -62,7 +62,7 @@ Renders an image, PDF, markdown note, or other vault file inline.
 {
   "id": "img-cover-7823",
   "type": "file",
-  "file": "_attachments/images/example.png",
+  "file": "wiki/assets/images/example.png",
   "x": -900,
   "y": -100,
   "width": 420,
@@ -93,7 +93,7 @@ Nodes placed "inside" a group are just positioned within its bounding box.
   "width": 1060,
   "height": 290,
   "color": "6",
-  "background": "_attachments/images/grid-bg.png",
+  "background": "wiki/assets/images/grid-bg.png",
   "backgroundStyle": "cover"
 }
 ```
@@ -255,13 +255,13 @@ function place_node(canvas, zone_label, new_w, new_h):
     {
       "id": "img-logo-pro",
       "type": "file",
-      "file": "_attachments/images/example.png",
+      "file": "wiki/assets/images/example.png",
       "x": -900, "y": -2180, "width": 420, "height": 236
     },
     {
       "id": "img-icon-free",
       "type": "file",
-      "file": "_attachments/images/example-icon.png",
+      "file": "wiki/assets/images/example-icon.png",
       "x": -440, "y": -2180, "width": 280, "height": 280
     },
     {
@@ -273,7 +273,7 @@ function place_node(canvas, zone_label, new_w, new_h):
     {
       "id": "img-seo",
       "type": "file",
-      "file": "_attachments/images/example-cover.png",
+      "file": "wiki/assets/images/example-cover.png",
       "x": -900, "y": -1800, "width": 420, "height": 236
     }
   ],
@@ -285,7 +285,7 @@ function place_node(canvas, zone_label, new_w, new_h):
 
 ## Common Mistakes
 
-- **Wrong path format**: use `_attachments/images/file.png` not `/home/user/...` or `~/...`
+- **Wrong path format**: use `wiki/assets/images/file.png` not `/home/user/...` or `~/...`
 - **ID collision**: always read existing IDs before generating a new one
 - **Negative y confusion**: `y: -2400` is ABOVE `y: -1000` (more negative = higher up)
 - **Group does not clip**: placing a node "inside" a group is just positioning it within the group's bounding box: there is no parent-child relationship in the JSON

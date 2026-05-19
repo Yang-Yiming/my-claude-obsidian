@@ -29,16 +29,16 @@ defuddle https://example.com/article
 ```
 Outputs clean markdown to stdout.
 
-### Save to .raw/
+### Preview cleaned markdown
 ```bash
-defuddle https://example.com/article > .raw/articles/article-slug-$(date +%Y-%m-%d).md
+defuddle https://example.com/article
 ```
 
-### Add frontmatter header after saving
-After running defuddle, prepend the source URL and fetch date:
+### Save only when the user asks
+This fork does not use a managed `.raw/` folder. If the user explicitly asks to keep a cleaned copy, save it under `wiki/sources/` as a source summary or another user-approved path under `wiki/`.
+
 ```bash
-SLUG="article-slug-$(date +%Y-%m-%d)"
-{ echo "---"; echo "source_url: https://example.com/article"; echo "fetched: $(date +%Y-%m-%d)"; echo "---"; echo ""; defuddle https://example.com/article; } > .raw/articles/$SLUG.md
+defuddle https://example.com/article
 ```
 
 ### Clean a local HTML file
@@ -79,5 +79,5 @@ If not installed: use WebFetch directly. The content will be less clean but stil
 The `/wiki-ingest` skill checks for defuddle automatically when a URL is passed. You do not need to run defuddle manually before ingesting a URL. The ingest skill will call it if available.
 
 To manually clean a page and save before ingesting:
-1. Run the save command above
-2. Then: `ingest .raw/articles/[slug].md`
+1. Run `defuddle [url]` and review the cleaned markdown.
+2. Then ingest the cleaned content directly, or ask the user where inside `wiki/` it should be kept.
