@@ -1,16 +1,23 @@
 {
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 hooks/confirm_raw_writes.py"
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "matcher": "startup|resume",
         "hooks": [
           {
-            "type": "command",
-            "command": "[ -f wiki/hot.md ] && cat wiki/hot.md || true"
-          },
-          {
             "type": "prompt",
-            "prompt": "If a wiki/ folder exists in the current directory, silently read wiki/hot.md to restore recent context. If wiki/hot.md does not exist, do nothing. Do not announce this. Do not report what you read. Just have the context available."
+            "prompt": "If wiki/hot.md exists, silently read it to restore recent context. If it does not exist, do nothing. Do not announce this. Do not report what you read. Just have the context available."
           }
         ]
       }
