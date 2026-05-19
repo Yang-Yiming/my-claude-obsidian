@@ -12,15 +12,15 @@ Use when: "build a sitemap wiki for my website", "map content gaps", "SEO audit 
 vault/
 ├── .raw/              # crawl exports, analytics, scraped pages, GSC data
 ├── wiki/
+│   ├── index.md
+│   ├── log.md
 │   ├── pages/         # one note per URL: status, meta, content summary
 │   ├── structure/     # site architecture, nav hierarchy, internal link map
 │   ├── audits/        # content gaps, redirect needs, thin content flags
 │   ├── keywords/      # keyword clusters, target page assignments
-│   └── entities/      # brand, authors, topic hubs
-├── _meta/
-│   ├── index.md
-│   └── log.md
-└── CLAUDE.md
+│   ├── entities/      # brand, authors, topic hubs
+│   └── meta/
+└── _templates/
 ```
 
 Frontmatter for `wiki/pages/` notes:
@@ -57,15 +57,15 @@ Use when: "map my codebase", "architecture wiki for my repo", "understand this p
 vault/
 ├── .raw/              # README, git log exports, code dumps, issue exports
 ├── wiki/
+│   ├── index.md
+│   ├── log.md
 │   ├── modules/       # one note per major module / package / service
 │   ├── components/    # reusable UI or functional components
 │   ├── decisions/     # Architecture Decision Records (ADRs)
 │   ├── dependencies/  # external deps, versions, risk assessment
-│   └── flows/         # data flows, request paths, auth flows
-├── _meta/
-│   ├── index.md
-│   └── log.md
-└── CLAUDE.md
+│   ├── flows/         # data flows, request paths, auth flows
+│   └── meta/
+└── _templates/
 ```
 
 Frontmatter for `wiki/modules/` notes:
@@ -99,15 +99,15 @@ Use when: "project wiki", "competitive intelligence", "team knowledge base", "me
 vault/
 ├── .raw/              # meeting transcripts, Slack exports, docs, emails
 ├── wiki/
+│   ├── index.md
+│   ├── log.md
 │   ├── stakeholders/  # people, companies, decision-makers
 │   ├── decisions/     # key decisions with rationale and date
 │   ├── deliverables/  # milestones, outputs, status tracking
 │   ├── intel/         # competitor analysis, market research
-│   └── comms/         # synthesized meeting notes, key threads
-├── _meta/
-│   ├── index.md
-│   └── log.md
-└── CLAUDE.md
+│   ├── comms/         # synthesized meeting notes, key threads
+│   └── meta/
+└── _templates/
 ```
 
 Frontmatter for `wiki/decisions/` notes:
@@ -138,16 +138,16 @@ Use when: "personal second brain", "track my goals", "journal synthesis", "life 
 vault/
 ├── .raw/              # journal entries, articles, podcast notes, voice transcripts
 ├── wiki/
+│   ├── index.md
+│   ├── log.md
+│   ├── hot.md
 │   ├── goals/         # personal and professional goals with progress tracking
 │   ├── learning/      # concepts being mastered, skill development
 │   ├── people/        # relationships, shared context, follow-ups
 │   ├── areas/         # life areas: health, finances, career, creative
-│   └── resources/     # books, courses, tools worth referencing
-├── _meta/
-│   ├── index.md
-│   ├── log.md
-│   └── hot-cache.md   # ~500-word summary of most active context
-└── CLAUDE.md
+│   ├── resources/     # books, courses, tools worth referencing
+│   └── meta/
+└── _templates/
 ```
 
 Frontmatter for `wiki/goals/` notes:
@@ -165,7 +165,7 @@ updated: YYYY-MM-DD
 ---
 ```
 
-Hot cache note: `_meta/hot-cache.md` is a ~500-word file Claude updates at the end of each session. It captures current focus areas, recent wins, and open threads. This prevents Claude from having to crawl the whole wiki to answer "where were we?".
+Hot cache note: `wiki/hot.md` is a ~500-word file the agent updates at the end of significant sessions. It captures current focus areas, recent wins, and open threads. This prevents the agent from having to crawl the whole wiki to answer "where were we?".
 
 Key wiki pages to create: `[[North Star]]`, `[[Weekly Review Template]]`, `[[Annual Goals]]`
 
@@ -179,15 +179,15 @@ Use when: "research wiki on [topic]", "track papers I'm reading", "build a thesi
 vault/
 ├── .raw/              # PDFs, web clips, data files, raw notes
 ├── wiki/
+│   ├── index.md
+│   ├── log.md
 │   ├── papers/        # paper summaries with key claims and methodology
 │   ├── concepts/      # extracted concepts, models, frameworks
 │   ├── entities/      # people, organizations, methods, datasets
 │   ├── thesis/        # evolving synthesis: the "state of the field" pages
-│   └── gaps/          # open questions, contradictions, research needed
-├── _meta/
-│   ├── index.md
-│   └── log.md
-└── CLAUDE.md
+│   ├── gaps/          # open questions, contradictions, research needed
+│   └── meta/
+└── _templates/
 ```
 
 Frontmatter for `wiki/papers/` notes:
@@ -220,15 +220,15 @@ Use when: "companion wiki for a book", "course notes wiki", "as I read [title]"
 vault/
 ├── .raw/              # chapter notes, highlights, exercises
 ├── wiki/
+│   ├── index.md
+│   ├── log.md
 │   ├── characters/    # characters, personas, agents, experts (adapt to content)
 │   ├── themes/        # major themes with supporting evidence
 │   ├── concepts/      # domain-specific terms and frameworks
 │   ├── timeline/      # plot structure, curriculum sequence, chapter map
-│   └── synthesis/     # your own takeaways, questions, applications
-├── _meta/
-│   ├── index.md
-│   └── log.md
-└── CLAUDE.md
+│   ├── synthesis/     # your own takeaways, questions, applications
+│   └── meta/
+└── _templates/
 ```
 
 Frontmatter for `wiki/concepts/` notes:

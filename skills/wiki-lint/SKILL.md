@@ -2,8 +2,8 @@
 name: wiki-lint
 description: >
   Health check the Obsidian wiki vault. Finds orphan pages, dead wikilinks, stale claims,
-  missing cross-references, frontmatter gaps, and empty sections. Creates or updates
-  Dataview dashboards. Generates canvas maps. Triggers on: "lint", "health check",
+  missing cross-references, frontmatter gaps, and empty sections. Can create or update
+  Bases dashboards and canvas maps. Triggers on: "lint", "health check",
   "clean up wiki", "check the wiki", "wiki maintenance", "find orphans", "wiki audit".
 ---
 
@@ -98,38 +98,15 @@ During lint, flag pages that violate the style guide:
 
 ---
 
-## Dataview Dashboard
+## Bases Dashboard
 
-Create or update `wiki/meta/dashboard.md` with these queries:
+If the user wants a dashboard, create or update `wiki/meta/dashboard.base` using the `obsidian-bases` skill. Keep lint focused on the report by default.
 
-````markdown
----
-type: meta
-title: "Dashboard"
-updated: YYYY-MM-DD
----
-# Wiki Dashboard
-
-## Recent Activity
-```dataview
-TABLE type, status, updated FROM "wiki" SORT updated DESC LIMIT 15
-```
-
-## Seed Pages (Need Development)
-```dataview
-LIST FROM "wiki" WHERE status = "seed" SORT updated ASC
-```
-
-## Entities Missing Sources
-```dataview
-LIST FROM "wiki/entities" WHERE !sources OR length(sources) = 0
-```
-
-## Open Questions
-```dataview
-LIST FROM "wiki/questions" WHERE answer_quality = "draft" SORT created DESC
-```
-````
+Recommended views:
+- All non-meta wiki pages grouped by `type`
+- Entities grouped by `entity_type`
+- Sources grouped by `source_type`
+- Open questions filtered by `answer_quality`
 
 ---
 

@@ -1,7 +1,6 @@
 ---
 name: canvas
-description: "Visual layer of the wiki. Add images, text cards, PDFs, and wiki pages to Obsidian canvas files with auto-positioning inside zones. Integrates with /banana for image capture. Triggers on: /canvas, canvas new, canvas add image, canvas add text, canvas add pdf, canvas add note, canvas zone, canvas list, canvas from banana, add to canvas, put this on the canvas, open canvas, create canvas."
-allowed-tools: Read Write Edit Glob Grep
+description: "Visual layer of the wiki. Add images, text cards, PDFs, and wiki pages to Obsidian canvas files with auto-positioning inside zones. Triggers on: /canvas, canvas new, canvas add image, canvas add text, canvas add pdf, canvas add note, canvas zone, canvas list, add to canvas, put this on the canvas, open canvas, create canvas."
 ---
 
 # canvas: Visual Reference Layer
@@ -173,21 +172,6 @@ wiki/canvases/design-ideas.canvas. 42 nodes (30 images, 4 text, 8 groups)
 
 ---
 
-### from banana (`/canvas from banana`) (if the banana-claude plugin is installed)
-
-1. Check `wiki/canvases/.recent-images.txt` first (session log of newly written images).
-2. If not found or empty: use `find` with correct precedence (parentheses required. Without them `-newer` only binds to the last `-name` clause):
-   ```bash
-   python3 -c "import time,os; open('/tmp/ten-min-ago','w').close(); os.utime('/tmp/ten-min-ago',(time.time()-600,time.time()-600))"
-   find _attachments/images -newer /tmp/ten-min-ago \( -name "*.png" -o -name "*.jpg" \)
-   ```
-   Note: `/banana` is an optional external skill not shipped in this plugin. If the user has it installed, the `.recent-images.txt` log will be populated. If not, the `find` command above is the fallback.
-3. If still none: show the 5 most recently modified images.
-4. Present list: "Found N recent images: [list]. Add to canvas? Which zone? (zone name / 'new [name]' / 'skip')"
-5. On confirmation: add each using the add image logic.
-
----
-
 ## Auto-Positioning Algorithm
 
 Read `references/canvas-spec.md` for the full coordinate system.
@@ -245,34 +229,10 @@ If a collision is detected (ID already exists in the canvas), append `-2`, `-3`,
 
 ---
 
-## Session Log (optional hook)
-
-If `wiki/canvases/.recent-images.txt` exists, append any new image path written to `_attachments/images/` during this session (one path per line, keep last 20).
-
-`/canvas from banana` reads this file first, making it instant without filesystem search.
-
----
-
-## Banana Integration (if the banana-claude plugin is installed)
-
-After any `/banana` run in the same session, if the user says "add to canvas" or "put on canvas", treat it as `/canvas from banana`.
-
-When `/banana` finishes generating images, suggest:
-> "Add generated images to canvas? Run `/canvas from banana`"
-
----
-
 ## Summary
 
 1. Read canvas-spec.md before editing any canvas JSON.
 2. Always read the canvas file before writing. Parse existing nodes to avoid ID collisions and calculate auto-positions.
 3. Create `_attachments/images/canvas/` for downloaded/copied images.
-4. Update `wiki/index.md` when creating new canvases.
+4. When creating a new canvas, update `wiki/overview.md`; do not add canvases to `wiki/index.md`.
 5. Report position and zone after every add operation.
-
-## See Also
-
-For standalone visual production (12 templates, 6 layout algorithms, AI generation,
-presentations), see [claude-canvas](https://github.com/AgriciDaniel/claude-canvas).
-This skill handles wiki-scoped visual boards. claude-canvas handles full-featured
-canvas orchestration for any project.

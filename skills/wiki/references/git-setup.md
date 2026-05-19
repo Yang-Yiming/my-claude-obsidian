@@ -34,7 +34,7 @@ The root `.gitignore` in this repo already covers the right exclusions:
 
 ## Obsidian Git Plugin
 
-After installing the plugin (see `plugins.md`):
+If the user chooses to use the Obsidian Git community plugin:
 
 Settings > Obsidian Git:
 - Auto backup interval: **15 minutes**

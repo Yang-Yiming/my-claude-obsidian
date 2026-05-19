@@ -1,15 +1,15 @@
 ---
-description: Bootstrap or check the claude-obsidian wiki vault. Reads the wiki skill and runs setup workflow.
+description: Bootstrap or check the local .raw/ + wiki/ vault.
 ---
 
 Read the `wiki` skill. Then run the setup workflow:
 
-1. Check if Obsidian is installed. If not, offer to install it (see `skills/wiki/references/plugins.md`).
-2. Check if this directory has a vault (look for `.obsidian/` folder). If yes, report current vault state.
-3. Check if the MCP server is configured (`claude mcp list`). If not, ask if the user wants to set it up.
-4. Ask ONE question: "What is this vault for?"
+1. Check whether `wiki/` exists and contains `index.md`, `log.md`, `hot.md`, and `overview.md`.
+2. Check whether `.raw/` exists. If not, create `.raw/articles/`, `.raw/images/`, and `.raw/files/`.
+3. If the wiki is missing or incomplete, ask ONE question: "What is this vault for?"
+4. Scaffold the minimal wiki structure from the answer.
 
-Then build the entire wiki structure based on the answer. Don't ask more questions. Scaffold it, show what was created, and ask: "Want to adjust anything before we start?"
+Then scaffold the wiki structure based on the answer. Don't ask more questions. Show what was created and ask: "Want to adjust anything before we start?"
 
 Examples of what the user might say:
 - "Map the architecture of github.com/org/repo"
@@ -20,4 +20,4 @@ Examples of what the user might say:
 - "Organize my YouTube channel — transcripts, topics, tools mentioned"
 - "Executive assistant brain — meetings, tasks, business context"
 
-If the vault is already set up, skip to checking what has been ingested recently and offering to continue where things left off.
+If the vault is already set up, report current wiki state from `wiki/index.md`, `wiki/log.md`, and `.raw/.manifest.json` if it exists.

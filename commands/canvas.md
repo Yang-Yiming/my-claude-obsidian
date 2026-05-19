@@ -1,5 +1,5 @@
 ---
-description: Open, create, or update a visual canvas — add images, text, PDFs, wiki pages, and banana-generated assets to Obsidian canvas files.
+description: Open, create, or update a visual canvas — add images, text, PDFs, and wiki pages to Obsidian canvas files.
 ---
 
 Read the `canvas` skill. Then run the operation matching the user's command.
@@ -14,7 +14,6 @@ Read the `canvas` skill. Then run the operation matching the user's command.
 | `/canvas add note [page]` | Add a wiki page as a linked card |
 | `/canvas zone [name] [color]` | Add a new labeled zone group |
 | `/canvas list` | List all canvases with node counts |
-| `/canvas from banana` | Find recent generated images and add them |
 
 Default canvas: `wiki/canvases/main.canvas`
 

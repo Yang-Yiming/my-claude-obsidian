@@ -36,12 +36,12 @@ Before ingesting any file, check `.raw/.manifest.json` to avoid re-processing un
 
 **Before ingesting a file:**
 1. Compute a hash: `md5sum [file] | cut -d' ' -f1` (or `sha256sum` on Linux).
-2. Check if the path exists in `.manifest.json` with the same hash.
+2. Check if the path exists in `.raw/.manifest.json` with the same hash.
 3. If hash matches, skip. Report: "Already ingested (unchanged). Use `force` to re-ingest."
 4. If missing or hash differs, proceed with ingest.
 
 **After ingesting a file:**
-1. Record `{hash, ingested_at, pages_created, pages_updated}` in `.manifest.json`.
+1. Record `{hash, ingested_at, pages_created, pages_updated}` in `.raw/.manifest.json`.
 2. Write the updated manifest back.
 
 Skip delta checking if the user says "force ingest" or "re-ingest".
@@ -154,7 +154,7 @@ Token budget matters. Follow these rules during ingest:
 ## Contradictions
 
 > [!note] Custom callout dependency
-> The `[!contradiction]` callout type used below is a **custom callout** defined in `.obsidian/snippets/vault-colors.css` (auto-installed by `/wiki` scaffold). It renders with reddish-brown styling and an alert-triangle icon when the snippet is enabled. If the snippet is missing, Obsidian falls back to default callout styling, so the page still works without the visual flourish. See [[skills/wiki/references/css-snippets.md]] for the four custom callouts (`contradiction`, `gap`, `key-insight`, `stale`).
+> The `[!contradiction]` callout type used below is a wiki convention. If Obsidian does not have custom styling for it, it still renders as a readable callout.
 
 When new info contradicts an existing wiki page:
 

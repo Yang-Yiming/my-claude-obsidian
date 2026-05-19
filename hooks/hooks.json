@@ -10,7 +10,7 @@
           },
           {
             "type": "prompt",
-            "prompt": "If a vault is configured for this session (check CLAUDE.md for VAULT_PATH or a wiki/ folder in the current directory), silently read wiki/hot.md to restore recent context. If wiki/hot.md does not exist, do nothing. This is a non-vault session. Do not announce this. Do not report what you read. Just have the context available."
+            "prompt": "If a wiki/ folder exists in the current directory, silently read wiki/hot.md to restore recent context. If wiki/hot.md does not exist, do nothing. Do not announce this. Do not report what you read. Just have the context available."
           }
         ]
       }
